@@ -3,7 +3,8 @@ import { AuthAccountModuleConfig } from './auth-account.types';
 
 export const authAccountActions: TypedActionTree<AuthAccountModuleConfig> = {
   login: async ({ commit, dispatch }, { username, password }) => {
-    commit('');
+    commit('loginSuccess');
+    await dispatch('login');
   },
 
   updateUserData: ({ commit, getters }, userData) => {

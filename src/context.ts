@@ -1,6 +1,7 @@
 import { TypedDispatch } from './dispatch';
 import { CustomState, ModuleConfig } from './primitives';
 import { MappedReturnType } from './utils/mapped-return-type';
+import { TypedCommit } from './commit';
 
 export type DefaultActionContext = {
   commit: TypedDispatch;
@@ -14,14 +15,16 @@ export type DefaultActionContext = {
 export type TypedActionContext<Module = undefined> = Module extends undefined
   ? DefaultActionContext
   : Module extends ModuleConfig<
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   infer State,
   infer RootState,
   infer Getters,
-  infer Actions,
-  infer Actions
+  infer _Actions,
+  infer _Mutations
+  /* eslint-enable */
   > ? {
-      commit: TypedDispatch<Actions>;
-      dispatch: TypedDispatch<Actions>;
+      commit: TypedCommit<Module>;
+      dispatch: TypedDispatch<Module>;
       state: State;
       getters: MappedReturnType<Getters>;
       rootState: RootState;
