@@ -1,9 +1,9 @@
 import { DispatchOptions } from 'vuex';
-import { CustomAction } from './primitives';
 import { Promisify } from './utils/promisify';
+import { CustomActions } from './primitives/custom-actions';
 
 export type TypedDispatch<
-  Actions extends { [k: string]: CustomAction } = { [k: string]: CustomAction },
+  Actions extends CustomActions = CustomActions,
 > = {
   // Action
   <T extends keyof Actions = string>(

@@ -1,19 +1,17 @@
 import { TypedDispatch } from './dispatch';
-import {
-  CustomState,
-  CustomGetter,
-  CustomAction,
-  CustomMutation,
-} from './primitives';
 import { MappedReturnType } from './utils/mapped-return-type';
 import { TypedCommit } from './commit';
+import { CustomState } from './primitives/custom-state';
+import { CustomGetters } from './primitives/custom-getters';
+import { CustomActions } from './primitives/custom-actions';
+import { CustomMutations } from './primitives/custom-mutations';
 
 export type TypedActionContext<
 State extends CustomState = CustomState,
 RootState extends CustomState = CustomState,
-Getters extends { [k: string]: CustomGetter } = { [k: string]: CustomGetter },
-Actions extends { [k: string]: CustomAction } = { [k: string]: CustomAction },
-Mutations extends { [k: string]: CustomMutation } = { [k: string]: CustomMutation },
+Getters extends CustomGetters = CustomGetters,
+Actions extends CustomActions = CustomActions,
+Mutations extends CustomMutations = CustomMutations,
 > = {
   commit: TypedCommit<Mutations>;
   dispatch: TypedDispatch<Actions>;

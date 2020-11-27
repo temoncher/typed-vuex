@@ -1,8 +1,8 @@
 import { CommitOptions } from 'vuex';
-import { CustomMutation } from './primitives';
+import { CustomMutations } from './primitives/custom-mutations';
 
 export type TypedCommit<
-Mutations extends { [k: string]: CustomMutation } = { [k: string]: CustomMutation },
+Mutations extends CustomMutations = CustomMutations,
 > = {
   // Mutation
   <T extends keyof Mutations = string>(

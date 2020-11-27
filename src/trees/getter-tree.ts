@@ -1,10 +1,11 @@
-import { MappedReturnType } from './utils/mapped-return-type';
-import { CustomState, CustomGetter } from './primitives';
+import { CustomState } from '@/primitives/custom-state';
+import { CustomGetters } from '@/primitives/custom-getters';
+import { MappedReturnType } from '../utils/mapped-return-type';
 
 export type TypedGettersTree<
 State extends CustomState = CustomState,
 RootState extends CustomState = CustomState,
-Getters extends { [k: string]: CustomGetter } = { [k: string]: CustomGetter },
+Getters extends CustomGetters = CustomGetters,
 > = {
   [K in keyof Getters]: (
     state: State,

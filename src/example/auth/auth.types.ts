@@ -1,13 +1,14 @@
-import { TypedModule } from '@/module';
+import { TypedModule } from '@/index';
 import { RootState } from '../root.state';
 import { AuthAccountModule } from './auth-account/auth-account.types';
 import { AuthState } from './auth.state';
 
 export type AuthModule = TypedModule<
+true,
 AuthState,
 RootState,
-{ [k: string]: never },
-{ [k: string]: never },
-{ [k: string]: never },
+never,
+never,
+never,
 { account: AuthAccountModule }
 >;
