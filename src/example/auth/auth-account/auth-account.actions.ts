@@ -13,7 +13,11 @@ export const authAccountActions: AuthAccountModule['actions'] = {
     commit('setLoadingStatus', some && userData ? 'loading' : 'error');
   },
 
-  logout: async () => {},
+  logout: async (context) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const something = context.rootGetters['auth/account/isUserOfficeViewer'];
+    await Promise.resolve();
+  },
 
   getUserProjects: async () => { },
 };
