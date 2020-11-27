@@ -1,5 +1,5 @@
 export type WithContext<
-  T extends Record<string, (...parameters: any) => any>,
+  T extends { [k: string]: (...parameters: any) => any },
   C,
 > = {
   [K in keyof T]: (

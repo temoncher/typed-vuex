@@ -1,29 +1,16 @@
-import { TypedActionTree } from '@/actions';
-import { IUser } from './models';
-import { AuthAccountMutations } from './auth-account.mutations';
-import { RootState } from './root.state';
-import { AuthAccountState } from './auth-account.state';
-import { AuthAccountGetters } from './auth-account.getters';
+import { TypedActionTree } from '@/action-tree';
+import { AuthAccountModuleConfig } from './auth-account.types';
 
-export type AuthAccountActions = {
-  login: (payload: { username: string; password: string }) => Promise<void>;
-  updateUserData: (userData: IUser) => void;
-  logout: () => Promise<void>;
-  getUserProjects: () => Promise<void>;
-};
-
-export const authAccountActions: TypedActionTree<
-AuthAccountState,
-RootState,
-AuthAccountGetters,
-AuthAccountActions,
-AuthAccountMutations
-> = {
+export const authAccountActions: TypedActionTree<AuthAccountModuleConfig> = {
   login: async ({ commit, dispatch }, { username, password }) => {
-    commit('loginSuccess');
+    commit('');
   },
 
-  updateUserData: ({ commit }, userData) => {},
+  updateUserData: ({ commit, getters }, userData) => {
+    const some = getters.isUserOfficeDirector;
+
+    commit('setLoadingStatus', some && userData ? 'loading' : 'error');
+  },
 
   logout: async ({ dispatch }) => {},
 

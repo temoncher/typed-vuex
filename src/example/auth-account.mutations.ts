@@ -1,16 +1,8 @@
-import { TypedMutationTree } from '@/mutations';
-import { getAuthAccountInitialState, AuthAccountState } from './auth-account.state';
-import { IUser, IProject } from './models';
+import { TypedMutationTree } from '@/mutation-tree';
+import { getAuthAccountInitialState } from './auth-account.state';
+import { AuthAccountModuleConfig } from './auth-account.types';
 
-export type AuthAccountMutations = {
-  setLoadingStatus: () => void;
-  loginSuccess: (userData: IUser) => void;
-  loginFailure: () => void;
-  setUserProjects: (projects: IProject[]) => void;
-  resetModuleState: () => void;
-};
-
-export const authAccountMutations: TypedMutationTree<AuthAccountState, AuthAccountMutations> = {
+export const authAccountMutations: TypedMutationTree<AuthAccountModuleConfig> = {
   setLoadingStatus: (state) => {
 
   },

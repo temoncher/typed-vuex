@@ -1,17 +1,16 @@
 import { TypedModule } from '@/modules';
-import { authAccountActions, AuthAccountActions } from './auth-account.actions';
-import { authAccountGetters, AuthAccountGetters } from './auth-account.getters';
-import { authAccountMutations, AuthAccountMutations } from './auth-account.mutations';
-import { getAuthAccountInitialState, AuthAccountState } from './auth-account.state';
-import { RootState } from './root.state';
+import { authAccountActions } from './auth-account.actions';
+import { authAccountGetters } from './auth-account.getters';
+import { authAccountMutations } from './auth-account.mutations';
+import { AuthAccountModuleConfig, AuthAccountState } from './auth-account.types';
 
-export const account: TypedModule<
-AuthAccountState,
-RootState,
-AuthAccountGetters,
-AuthAccountActions,
-AuthAccountMutations
-> = {
+export const getAuthAccountInitialState = (): AuthAccountState => ({
+  status: null,
+  user: { name: 'John Doe' },
+  userProjects: [],
+});
+
+export const account: TypedModule<AuthAccountModuleConfig> = {
   namespaced: true,
   state: getAuthAccountInitialState(),
   getters: authAccountGetters,
