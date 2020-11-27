@@ -1,7 +1,6 @@
-import { TypedActionTree } from '@/action-tree';
-import { AuthAccountModuleConfig } from './auth-account.types';
+import { AuthAccountModule } from './auth-account.types';
 
-export const authAccountActions: TypedActionTree<AuthAccountModuleConfig> = {
+export const authAccountActions: AuthAccountModule['actions'] = {
   login: async ({ commit, dispatch }, { username, password }) => {
     commit('loginSuccess');
     await dispatch('login');

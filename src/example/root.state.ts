@@ -1,5 +1,5 @@
-import { AuthAccountState } from './auth-account.state';
+import { AuthState } from './auth/auth.state';
 
 export type RootState = {
-  auth: AuthAccountState;
+  auth: AuthState;
 };

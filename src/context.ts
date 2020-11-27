@@ -1,32 +1,24 @@
 import { TypedDispatch } from './dispatch';
-import { CustomState, ModuleConfig } from './primitives';
+import {
+  CustomState,
+  CustomGetter,
+  CustomAction,
+  CustomMutation,
+} from './primitives';
 import { MappedReturnType } from './utils/mapped-return-type';
 import { TypedCommit } from './commit';
 
-export type DefaultActionContext = {
-  commit: TypedDispatch;
-  dispatch: TypedDispatch;
-  state: CustomState;
-  getters: { [k: string]: any };
-  rootState: CustomState;
+export type TypedActionContext<
+State extends CustomState = CustomState,
+RootState extends CustomState = CustomState,
+Getters extends { [k: string]: CustomGetter } = { [k: string]: CustomGetter },
+Actions extends { [k: string]: CustomAction } = { [k: string]: CustomAction },
+Mutations extends { [k: string]: CustomMutation } = { [k: string]: CustomMutation },
+> = {
+  commit: TypedCommit<Mutations>;
+  dispatch: TypedDispatch<Actions>;
+  state: State;
+  getters: MappedReturnType<Getters>;
+  rootState: RootState;
   rootGetters: { [k: string]: any };
 };
-
-export type TypedActionContext<Module = undefined> = Module extends undefined
-  ? DefaultActionContext
-  : Module extends ModuleConfig<
-  /* eslint-disable @typescript-eslint/no-unused-vars */
-  infer State,
-  infer RootState,
-  infer Getters,
-  infer _Actions,
-  infer _Mutations
-  /* eslint-enable */
-  > ? {
-      commit: TypedCommit<Module>;
-      dispatch: TypedDispatch<Module>;
-      state: State;
-      getters: MappedReturnType<Getters>;
-      rootState: RootState;
-      rootGetters: { [k: string]: any };
-    } : DefaultActionContext;

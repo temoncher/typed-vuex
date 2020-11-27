@@ -1,21 +1,19 @@
-import { ModuleConfig } from './primitives';
+import {
+  CustomState,
+  CustomGetter,
+  CustomAction,
+  CustomMutation,
+} from './primitives';
 import { WithContext } from './utils/with-context';
 import { TypedActionContext } from './context';
 
-export type DefaultActionTree = WithContext<
-{ [k: string]: (...parameters: any) => any },
-TypedActionContext
+export type TypedActionTree<
+State extends CustomState = CustomState,
+RootState extends CustomState = CustomState,
+Getters extends { [k: string]: CustomGetter } = { [k: string]: CustomGetter },
+Actions extends { [k: string]: CustomAction } = { [k: string]: CustomAction },
+Mutations extends { [k: string]: CustomMutation } = { [k: string]: CustomMutation },
+> = WithContext<
+Actions,
+TypedActionContext<State, RootState, Getters, Actions, Mutations>
 >;
-
-export type TypedActionTree<Module = undefined> = Module extends undefined
-  ? DefaultActionTree
-  : Module extends ModuleConfig<
-  /* eslint-disable @typescript-eslint/no-unused-vars */
-  infer _State,
-  infer _RootState,
-  infer _Getters,
-  infer Actions,
-  infer _Mutations
-  /* eslint-enable */
-  > ? WithContext<Actions, TypedActionContext<Module>>
-    : DefaultActionTree;

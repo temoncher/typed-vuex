@@ -1,7 +1,9 @@
-import { Commit, CommitOptions } from 'vuex';
-import { ModuleConfig, CustomMutation } from './primitives';
+import { CommitOptions } from 'vuex';
+import { CustomMutation } from './primitives';
 
-export type TypedModuleMutation<Mutations extends { [k: string]: CustomMutation }> = {
+export type TypedCommit<
+Mutations extends { [k: string]: CustomMutation } = { [k: string]: CustomMutation },
+> = {
   // Mutation
   <T extends keyof Mutations = string>(
     type: T,
@@ -26,18 +28,3 @@ export type TypedModuleMutation<Mutations extends { [k: string]: CustomMutation 
     options: CommitOptions,
   ): ReturnType<Mutations[T]>;
 };
-
-export type DefaultCommit = Commit;
-
-export type TypedCommit<Module = undefined> = Module extends undefined
-  ? DefaultCommit
-  : Module extends ModuleConfig<
-  /* eslint-disable @typescript-eslint/no-unused-vars */
-  infer _State,
-  infer _RootState,
-  infer _Getters,
-  infer _Actions,
-  infer Mutations
-  /* eslint-enable */
-  > ? TypedModuleMutation<Mutations>
-    : DefaultCommit;

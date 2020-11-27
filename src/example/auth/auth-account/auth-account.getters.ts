@@ -1,7 +1,6 @@
-import { TypedGettersTree } from '@/getter-tree';
-import { AuthAccountModuleConfig } from './auth-account.types';
+import { AuthAccountModule } from './auth-account.types';
 
-export const authAccountGetters: TypedGettersTree<AuthAccountModuleConfig> = {
+export const authAccountGetters: AuthAccountModule['getters'] = {
   isUserAdmin: (state) => Boolean(state.status),
   isUserOfficeDirector: (state, getters) => Boolean(getters.isUserAdmin),
   isUserOfficeViewer: (state, getters, rootState) => Boolean(rootState),
