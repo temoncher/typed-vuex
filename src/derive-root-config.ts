@@ -21,4 +21,9 @@ export type DeriveRootConfig<
     DeepTraverse<M, 'mutations'>, K
     >
   };
+  actions: {
+    [K in Leaves<DeepTraverse<M, 'actions'>>]: OutputType<
+    DeepTraverse<M, 'actions'>, K
+    >
+  };
 };

@@ -10,4 +10,7 @@ export type DefaultRootConfig = {
   mutations: {
     [k: string]: (payload: any) => void;
   };
+  actions: {
+    [k: string]: (payload: any) => any;
+  };
 };

@@ -1,10 +1,14 @@
+import { IUser } from '@/example/models';
 import { AuthAccountModule } from './auth-account.module';
 
 export const authAccountActions: AuthAccountModule['actions'] = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   login: async ({ commit, dispatch }, { username, password }) => {
     commit('auth/account/setUserProjects');
-    await dispatch('login');
+    const user: IUser = {
+      name: 'Josh',
+    };
+    await dispatch('auth/account/updateUserData', user, { root: true });
   },
 
   updateUserData: ({ commit, getters }, userData) => {

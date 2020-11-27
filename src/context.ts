@@ -8,7 +8,7 @@ Config extends DefaultModuleConfig = DefaultModuleConfig,
 RootConfig extends DefaultRootConfig = DefaultRootConfig,
 > = {
   commit: TypedCommit<Config['mutations'], RootConfig['mutations']>;
-  dispatch: TypedDispatch<Config['actions']>;
+  dispatch: TypedDispatch<Config['actions'], RootConfig['actions']>;
   state: Config['state'];
   getters: MappedReturnType<Config['getters']>;
   rootState: RootConfig['state'];

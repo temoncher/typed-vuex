@@ -2,30 +2,45 @@ import { DispatchOptions } from 'vuex';
 import { Promisify } from './utils/promisify';
 import { CustomActions } from './primitives/custom-actions';
 
+type OptionsWithRoot<V extends true | false> = V extends true
+  ? Omit<DispatchOptions, 'root'> & { root: true }
+  : Omit<DispatchOptions, 'root'> & { root?: false };
+
+type DeriveActionType<
+  T extends keyof Actions | keyof RootActions,
+  Actions extends CustomActions,
+  RootActions extends CustomActions,
+> = T extends keyof Actions
+  ? Actions[T]
+  : T extends keyof RootActions
+    ? RootActions[T]
+    : never;
+
 export type TypedDispatch<
-  Actions extends CustomActions = CustomActions,
+  Actions extends CustomActions,
+  RootActions extends CustomActions,
 > = {
   // Action
-  <T extends keyof Actions = string>(
+  <T extends keyof Actions | keyof RootActions = string>(
     type: T,
-    payload?: Parameters<Actions[T]>[0]
-  ): Promisify<ReturnType<Actions[T]>>;
+    payload?: Parameters<
+    DeriveActionType<T, Actions, RootActions>
+    >[0],
+    options?: T extends keyof Actions ? OptionsWithRoot<false> : OptionsWithRoot<true>
+  ): Promisify<ReturnType<
+  DeriveActionType<T, Actions, RootActions>
+  >>;
 
   // Action with `type` in the payload
   <T extends keyof Actions = string>(
-    payloadWithType: { type: T; payload: Parameters<Actions[T]>[0] }
-  ): Promisify<ReturnType<Actions[T]>>;
-
-  // Global action
-  <T extends keyof Actions = string>(
-    type: string,
-    payload: Parameters<Actions[T]>[0],
-    options: DispatchOptions,
-  ): Promisify<ReturnType<Actions[T]>>;
-
-  // Global action with `type` in the payload
-  <T extends keyof Actions = string>(
-    payloadWithType: { type: T; payload: Parameters<Actions[T]>[0]},
-    options: DispatchOptions,
-  ): Promisify<ReturnType<Actions[T]>>;
+    payloadWithType: {
+      type: T;
+      payload: Parameters<
+      DeriveActionType<T, Actions, RootActions>
+      >[0];
+    },
+    options?: T extends keyof Actions ? OptionsWithRoot<false> : OptionsWithRoot<true>
+  ): Promisify<ReturnType<
+  DeriveActionType<T, Actions, RootActions>
+  >>;
 };
