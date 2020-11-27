@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
+import { AuthAccountModule } from './auth-account.module';
 import { getAuthAccountInitialState } from './auth-account.state';
-import { AuthAccountModule } from './auth-account.types';
 
 export const authAccountMutations: AuthAccountModule['mutations'] = {
   setLoadingStatus: (state, status) => {

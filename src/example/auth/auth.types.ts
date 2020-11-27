@@ -1,14 +1,11 @@
-import { TypedModule } from '@/index';
-import { RootState } from '../root.state';
-import { AuthAccountModule } from './auth-account/auth-account.types';
-import { AuthState } from './auth.state';
+import { ModuleConfig } from '@/module-config';
+import { AuthAccountModuleConfig } from './auth-account/auth-account.types';
 
-export type AuthModule = TypedModule<
+export type AuthModuleConfig = ModuleConfig<
 true,
-AuthState,
-RootState,
 never,
 never,
 never,
-{ account: AuthAccountModule }
+never,
+{ account: AuthAccountModuleConfig }
 >;

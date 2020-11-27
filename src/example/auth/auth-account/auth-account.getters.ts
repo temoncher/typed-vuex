@@ -1,4 +1,4 @@
-import { AuthAccountModule } from './auth-account.types';
+import { AuthAccountModule } from './auth-account.module';
 
 export const authAccountGetters: AuthAccountModule['getters'] = {
   isUserAdmin: (state) => Boolean(state.status),

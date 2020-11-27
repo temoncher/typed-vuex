@@ -1,6 +1,7 @@
-import { AuthAccountModule } from './auth-account.types';
+import { AuthAccountModule } from './auth-account.module';
 
 export const authAccountActions: AuthAccountModule['actions'] = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   login: async ({ commit, dispatch }, { username, password }) => {
     commit('loginSuccess');
     await dispatch('login');
@@ -12,7 +13,7 @@ export const authAccountActions: AuthAccountModule['actions'] = {
     commit('setLoadingStatus', some && userData ? 'loading' : 'error');
   },
 
-  logout: async ({ dispatch }) => {},
+  logout: async () => {},
 
-  getUserProjects: async ({ commit }) => { },
+  getUserProjects: async () => { },
 };

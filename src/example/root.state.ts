@@ -1,5 +1,3 @@
-import { AuthState } from './auth/auth.state';
-
 export type RootState = {
-  auth: AuthState;
+  auth: string;
 };

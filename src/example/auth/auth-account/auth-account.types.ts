@@ -1,6 +1,5 @@
 import { IUser, IProject } from '@/example/models';
-import { RootState } from '@/example/root.state';
-import { TypedModule } from '@/index';
+import { ModuleConfig } from '@/module-config';
 import { AuthAccountState } from './auth-account.state';
 
 export type AuthAccountActions = {
@@ -26,10 +25,9 @@ export type AuthAccountMutations = {
   resetModuleState: () => void;
 };
 
-export type AuthAccountModule = TypedModule<
+export type AuthAccountModuleConfig = ModuleConfig<
 true,
 AuthAccountState,
-RootState,
 AuthAccountGetters,
 AuthAccountActions,
 AuthAccountMutations
