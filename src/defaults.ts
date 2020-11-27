@@ -7,4 +7,7 @@ export type DefaultRootConfig = {
   getters: {
     [k: string]: any;
   };
+  mutations: {
+    [k: string]: (payload: any) => void;
+  };
 };

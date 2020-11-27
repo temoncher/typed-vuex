@@ -7,7 +7,7 @@ export type TypedActionContext<
 Config extends DefaultModuleConfig = DefaultModuleConfig,
 RootConfig extends DefaultRootConfig = DefaultRootConfig,
 > = {
-  commit: TypedCommit<Config['mutations']>;
+  commit: TypedCommit<Config['mutations'], RootConfig['mutations']>;
   dispatch: TypedDispatch<Config['actions']>;
   state: Config['state'];
   getters: MappedReturnType<Config['getters']>;

@@ -16,4 +16,9 @@ export type DeriveRootConfig<
         : never
       : never;
   };
+  mutations: {
+    [K in Leaves<DeepTraverse<M, 'mutations'>>]: OutputType<
+    DeepTraverse<M, 'mutations'>, K
+    >
+  };
 };
